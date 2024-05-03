@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -13,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.net.Uri;
 
 import santos.pimentel.lista_.R;
 
@@ -42,6 +46,41 @@ public class NewItemActivity extends AppCompatActivity {
             }
         });
 
+        Button btnAddItem = findViewById(R.id.btnAddItem);
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (photoSelected == null) {
+                    Toast.makeText(NewItemActivity.this, "E necessario selecionar uma imagem", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                EditText etTitle = findViewById(R.id.etTitle);
+                String title = etTitle.getText().toString();
+
+                if (title.isEmpty()) {
+                    Toast.makeText(NewItemActivity.this, "E necessario inserir um titulo", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                EditText etDesc = findViewById(R.id.etDesc);
+                String description = etDesc.getText().toString();
+
+                if (description.isEmpty()) {
+                    Toast.makeText(NewItemActivity.this, "E necessario inserir uma descricao", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Intent i = new Intent();
+                i.setData(photoSelected);
+                i.putExtra("title", title);
+                i.putExtra("description", description);
+                setResult(Activity.RESULT_OK, i);
+                finish();
+            }
+        });
     }
 
     @Override
