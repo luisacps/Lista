@@ -33,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         LayoutInflater inflater = LayoutInflater.from(mainActivity);
         // uso do layoutinflater para criar os elementos referentes a um item
         View v = inflater.inflate(R.layout.item_list, parent, false);
-        // guarda a view num objeto viewholder e retorna ele
+        // guarda a view num objeto viewholder e retorna el
         return new MyViewHolder(v);
     }
 
