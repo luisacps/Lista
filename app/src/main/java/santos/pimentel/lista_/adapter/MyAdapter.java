@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,14 +27,20 @@ public class MyAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
+    // metodo que cria os elementos de interface para um item
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // criacao de um layoutinflater, que le o arquivo xml do item
         LayoutInflater inflater = LayoutInflater.from(mainActivity);
+        // uso do layoutinflater para criar os elementos referentes a um item
         View v = inflater.inflate(R.layout.item_list, parent, false);
+        // guarda a view num objeto viewholder e retorna ele
         return new MyViewHolder(v);
     }
 
     @Override
+    // metodo que recebe o viewholder criado no metodo oncreateviewholder e preenche os elementos de interface com os dados
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        // obtencao do item que vai ser usado
         MyItem myItem = itens.get(position);
         View v = holder.itemView;
 
@@ -48,6 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     }
 
     @Override
+    // metodo que retorna a quantidade de itens que a lista possui
     public int getItemCount() {
         return itens.size();
     }
