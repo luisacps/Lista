@@ -57,8 +57,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // obtencao do recycleview
         RecyclerView rvItens = findViewById(R.id.rvItens);
+        // criacao do myadapter
         myAdapter = new MyAdapter(this,itens);
+        // set do myadapter no recyclerview
         rvItens.setAdapter(myAdapter);
 
         rvItens.setHasFixedSize(true);

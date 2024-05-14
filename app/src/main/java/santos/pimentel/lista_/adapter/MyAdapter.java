@@ -33,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         LayoutInflater inflater = LayoutInflater.from(mainActivity);
         // uso do layoutinflater para criar os elementos referentes a um item
         View v = inflater.inflate(R.layout.item_list, parent, false);
-        // guarda a view num objeto viewholder e retorna el
+        // guarda a view num objeto viewholder e retorna ele
         return new MyViewHolder(v);
     }
 
@@ -42,8 +42,10 @@ public class MyAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         // obtencao do item que vai ser usado
         MyItem myItem = itens.get(position);
+        // obtencao do objeto view guardado dentro do viewholder
         View v = holder.itemView;
 
+        // obtencao dos dados e set nos elementos de interface
         ImageView imvPhoto = v.findViewById(R.id.imvPhoto);
         imvPhoto.setImageURI(myItem.photo);
 
