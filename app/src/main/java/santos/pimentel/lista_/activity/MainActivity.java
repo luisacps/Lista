@@ -59,16 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
         // obtencao do recycleview
         RecyclerView rvItens = findViewById(R.id.rvItens);
-        // criacao do myadapter
+        // criacao do adapter
         myAdapter = new MyAdapter(this,itens);
-        // set do myadapter no recyclerview
+        // set do adapter no recyclerview
         rvItens.setAdapter(myAdapter);
-
+        // metodo que indica para o recycleview que não há variação no tamanho do itens da lista
         rvItens.setHasFixedSize(true);
 
+        // criacao de um gerenciador de layout que faz com que a lista seja mostrada no recycleview de forma linear e verticalmente
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvItens.setLayoutManager(layoutManager);
-
+        // criacao de um decorador, uma linha para separar cada um dos itens
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
         rvItens.addItemDecoration(dividerItemDecoration);
 
@@ -89,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 // adicao do novo item a arraylist de itens
                 itens.add(myItem);
 
+                // notificacao de que um novo item vindo de newitemactivity foi recebido pela main
+                // essa notificação precisa ser feita para que o novo item seja mostrado no recycleview
                 myAdapter.notifyItemInserted(itens.size()-1);
             }
         }
