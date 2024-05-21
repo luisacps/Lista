@@ -98,7 +98,7 @@ public class NewItemActivity extends AppCompatActivity {
     }
 
     @Override
-    // o resquest e o codigo que indica a chamada, o result e o codigo que diz se a newitemactivity retornou dados corretamente, data é o dado retornado
+    // o resquest é o codigo que indica a chamada, o result é o codigo que diz se a newitemactivity retornou dados corretamente, data é o dado retornado
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
