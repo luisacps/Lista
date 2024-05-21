@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.net.Uri;
 
 import santos.pimentel.lista_.R;
@@ -36,6 +38,13 @@ public class NewItemActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+        Uri selectPhotoLocation = vm.getSelectPhotoLocation();
+        if (selectPhotoLocation != null) {
+            ImageView imvPhotoPreview = findViewById(R.id.imgPhotoPreview);
+            imvPhotoPreview.setImageURI(selectPhotoLocation);
+        }
 
         // obtencao do botao que vai abrir a galeria do celular
         ImageButton imgCI = findViewById(R.id.imgCI);
@@ -107,11 +116,14 @@ public class NewItemActivity extends AppCompatActivity {
             // condicional que ve se houve mesmo o retorno de dados
             if (resultCode == Activity.RESULT_OK) {
                 // obtencao do uri da imagem selecionada
-                photoSelected = data.getData();
+                Uri photoSelected = data.getData();
                 // variavel que coleta o imageview da activity
                 ImageView imgPhotoPreview = findViewById(R.id.imgPhotoPreview);
                 // set da imagem selecionada do imageview da pagina
                 imgPhotoPreview.setImageURI(photoSelected);
+
+                NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+                vm.setSelectPhotoLocation(selectedPhoto);
             }
         }
     }

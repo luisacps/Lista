@@ -2,6 +2,8 @@ package santos.pimentel.lista_.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,12 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import santos.pimentel.lista_.R;
 import santos.pimentel.lista_.adapter.MyAdapter;
 import santos.pimentel.lista_.model.MyItem;
+import santos.pimentel.lista_.util.Util;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,7 +90,15 @@ public class MainActivity extends AppCompatActivity {
                 MyItem myItem = new MyItem();
                 myItem.title = data.getStringExtra("title");
                 myItem.description = data.getStringExtra("description");
-                myItem.photo = data.getData();
+                Uri selectedPhotoURI = data.getData();
+
+                try {
+                    Bitmap photo = Util.getBitmap(MainActivity.this, selectedPhotoURI, 10, 10);
+                    myItem.photo = photo;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
                 // adicao do novo item a arraylist de itens
                 itens.add(myItem);
 

@@ -1,10 +1,10 @@
 package santos.pimentel.lista_.model;
 
-import android.net.Uri;
+import android.graphics.Bitmap;
 
 public class MyItem {
     // endereco da imagem do item
-    public Uri photo;
+    public Bitmap photo;
     // guarda o titulo do item
     public String title;
     // guarda a descricao do item
