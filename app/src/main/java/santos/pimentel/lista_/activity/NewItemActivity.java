@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.net.Uri;
 
 import santos.pimentel.lista_.R;
+import santos.pimentel.lista_.model.NewItemActivityViewModel;
 
 public class NewItemActivity extends AppCompatActivity {
 
@@ -39,8 +40,10 @@ public class NewItemActivity extends AppCompatActivity {
             return insets;
         });
 
+        // obtenção do viewmodel da activity, que está guardando o Uri da imagem
         NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
         Uri selectPhotoLocation = vm.getSelectPhotoLocation();
+        // condição que identifica se uma imagem já tinha sido selecionada antes da rotação da tela
         if (selectPhotoLocation != null) {
             ImageView imvPhotoPreview = findViewById(R.id.imgPhotoPreview);
             imvPhotoPreview.setImageURI(selectPhotoLocation);
@@ -123,7 +126,7 @@ public class NewItemActivity extends AppCompatActivity {
                 imgPhotoPreview.setImageURI(photoSelected);
 
                 NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
-                vm.setSelectPhotoLocation(selectedPhoto);
+                vm.setSelectPhotoLocation(photoSelected);
             }
         }
     }

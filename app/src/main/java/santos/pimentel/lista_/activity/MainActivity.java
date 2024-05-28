@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import santos.pimentel.lista_.R;
 import santos.pimentel.lista_.adapter.MyAdapter;
+import santos.pimentel.lista_.model.MainActivityViewModel;
 import santos.pimentel.lista_.model.MyItem;
 import santos.pimentel.lista_.util.Util;
 
@@ -63,7 +65,13 @@ public class MainActivity extends AppCompatActivity {
 
         // obtencao do recycleview
         RecyclerView rvItens = findViewById(R.id.rvItens);
-        // criacao do adapter
+
+        // obtenção do viewmodel da main
+        MainActivityViewModel vm = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        // obtenção da lista de itens que agora é guardada na mainactivityviewmodel
+        List<MyItem> itens = vm.getItens();
+
+        // criacao do adapter, que recebe a lista de itens como parâmetro
         myAdapter = new MyAdapter(this,itens);
         // set do adapter no recyclerview
         rvItens.setAdapter(myAdapter);
@@ -93,11 +101,19 @@ public class MainActivity extends AppCompatActivity {
                 Uri selectedPhotoURI = data.getData();
 
                 try {
-                    Bitmap photo = Util.getBitmap(MainActivity.this, selectedPhotoURI, 10, 10);
+                    // uso da função bitmap, herdada do arquivo util.java
+                    // essa função guarda a imagem dentro de um bitmap (como um adecsrição da imagem em pixels)
+                    // o uso dessa função dispensa o uso do endereço Uri
+                    Bitmap photo = Util.getBitmap(MainActivity.this, selectedPhotoURI, 100, 100);
                     myItem.photo = photo;
-                } catch (FileNotFoundException e) {
+                } // exceção disparada caso a imagem não seja encontrada
+                catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+
+                // novamente o viewmodel é obtido para que o novo item seja adicionado
+                MainActivityViewModel vm = new ViewModelProvider(this).get(MainActivityViewModel.class);
+                List<MyItem> itens = vm.getItens();
 
                 // adicao do novo item a arraylist de itens
                 itens.add(myItem);
