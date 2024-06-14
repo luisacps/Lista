@@ -32,7 +32,6 @@ import santos.pimentel.lista_.util.Util;
 public class MainActivity extends AppCompatActivity {
 
     static int NEW_ITEM_REQUEST = 1;
-    List<MyItem> itens = new ArrayList<MyItem>();
 
     MyAdapter myAdapter;
 
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         myAdapter = new MyAdapter(this,itens);
         // set do adapter no recyclerview
         rvItens.setAdapter(myAdapter);
+
         // metodo que indica para o recycleview que não há variação no tamanho do itens da lista
         rvItens.setHasFixedSize(true);
 
@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         // criacao de um decorador, uma linha para separar cada um dos itens
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
         rvItens.addItemDecoration(dividerItemDecoration);
-
     }
 
     @Override

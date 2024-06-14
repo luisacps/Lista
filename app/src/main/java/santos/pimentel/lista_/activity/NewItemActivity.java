@@ -18,6 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Bitmap;
+
 import android.net.Uri;
 
 import santos.pimentel.lista_.R;
@@ -27,7 +29,6 @@ public class NewItemActivity extends AppCompatActivity {
 
     static int PHOTO_PICKER_REQUEST = 1;
     // uri -> endereco de um dado que esta fora da app, o atributo vai guardar o endereco da imagem selecionada
-    Uri photoSelected = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class NewItemActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
+                Uri photoSelected =  vm.getSelectPhotoLocation();
                 // condicional executada caso nenhuma imagem seja selecionada
                 if (photoSelected == null) {
                     // exibicao de uma mensagem de erro
